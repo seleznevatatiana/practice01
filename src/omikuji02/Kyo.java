@@ -11,4 +11,5 @@ public class Kyo extends Omikuji{
     public void setUnsei() {
 
     }
-    }
+
+}
