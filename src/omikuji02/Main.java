@@ -17,7 +17,7 @@ public class Main {
 
           //読み込みファイルのインスタンス生成
           //ファイル名を指定する
-          fi = new FileInputStream("fortune.csv");
+          fi = new FileInputStream("src/omikuji02/fortune.csv");
           is = new InputStreamReader(fi);
           br = new BufferedReader(is);
 
