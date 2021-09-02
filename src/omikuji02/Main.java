@@ -31,6 +31,10 @@ public class Main {
           // lineをカンマで分割し、配列dataに設定
           data = line.split(",");
           if (data.length > 3) {
+
+//              int index = new Random().nextInt(data.length);
+//              String result = data.get(index);
+
               // 読み込んだCSVファイルの内容を出力
             System.out.println("運勢:"  + data[0]);
             System.out.println("願い事:"  + data[1]);
