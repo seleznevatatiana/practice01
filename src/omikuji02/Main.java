@@ -1,53 +1,73 @@
 package omikuji02;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.StringTokenizer;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 public class Main {
 
     public static void main(String[] args) {
 
+      //ファイル読み込みで使用する３つのクラス
+        FileInputStream fi = null;
+        InputStreamReader is = null;
+        BufferedReader br = null;
+
         try {
-            File csv = new File("fortune.csv"); // CSVデータファイル
 
-            BufferedReader br = new BufferedReader(new FileReader(csv));
+          //読み込みファイルのインスタンス生成
+          //ファイル名を指定する
+          fi = new FileInputStream("fortune.csv");
+          is = new InputStreamReader(fi);
+          br = new BufferedReader(is);
 
-            // 最終行まで読み込む
-            String line = "";
-            while ((line = br.readLine()) != null) {
+          //読み込み行
+          String line;
 
-              // 1行をデータの要素に分割
-              StringTokenizer st = new StringTokenizer(line, ",");
+          //読み込み行数の管理
+          int i = 0;
 
-              while (st.hasMoreTokens()) {
-                // 1行の各要素をタブ区切りで表示
-                System.out.print(st.nextToken() + "\t");
+          //列名を管理する為の配列
+          String[] arr = null;
+
+          //1行ずつ読み込みを行う
+          while ((line = br.readLine()) != null) {
+
+            //先頭行は列名
+            if (i == 0) {
+
+              //カンマで分割した内容を配列に格納する
+              // arr = { "no","name","age","gender","bloodtype" };
+              arr = line.split(",");
+
+            } else {
+
+              //カンマで分割した内容を配列に格納する
+              String[] data = line.split(",");
+
+              //配列の中身を順位表示する。列数(=列名を格納した配列の要素数)分繰り返す
+              int colno = 0;
+              for (String column : arr) {
+                System.out.println(column + ":" + data[colno]);
+                colno++;
+
               }
-              System.out.println();
-            }
-            br.close();
 
-          } catch (FileNotFoundException e) {
-            // Fileオブジェクト生成時の例外捕捉
-            e.printStackTrace();
-          } catch (IOException e) {
-            // BufferedReaderオブジェクトのクローズ時の例外捕捉
-            e.printStackTrace();
+            }
+
+            //行数のインクリメント
+            i++;
+
           }
 
-//
-//          // 読み込みデータの表示
-//          for ( String[] row : csvData ) {
-//            System.out.println("名前　: " + row[0]);
-//            System.out.println("性別　: " + row[1]);
-//            System.out.println("年齢　: " + row[2]);
-//            System.out.println();
-//          }
-//        } catch(Exception e) {
-//          e.printStackTrace();
+        } catch (Exception e) {
+          e.printStackTrace();
+        } finally {
+          try {
+            br.close();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
         }
       }
+    }
