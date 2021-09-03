@@ -36,11 +36,6 @@ public class Main {
           data = line.split(",");
           if (data.length > 3) {
 
-              int num =  (int) (Math.random() * (data.length));
-              System.out.println(data[num]);
-
-//             String str = String.format("今日の運勢は%sです", data[0]);
-
               Properties properties = new Properties();
               String file1 = "src/omikuji02/fortune.properties";
 
@@ -50,6 +45,10 @@ public class Main {
                       properties.load(fis);
                       String a = properties.getProperty("disp_str");
                       String str = String.format(a, data[0]);
+
+//                      int num =  (int) (Math.random() * (str.length));
+//                      System.out.println(data[num]);
+
 
                       System.out.println(str);
 
@@ -61,10 +60,13 @@ public class Main {
               }
 
               // 読み込んだCSVファイルの内容を出力
-//            System.out.println(str);
-            System.out.println("願い事:"  + data[1]);
-            System.out.println("商い:"  + data[2]);
-            System.out.println("学問:"  + data[3]);
+
+            String negaigoto = data[1];
+            String akinai = data[2];
+            String gakumon = data[3];
+            System.out.println("願い事:"  + negaigoto);
+            System.out.println("商い:"  + akinai);
+            System.out.println("学問:"  + gakumon);
           }
           System.out.println();
 
