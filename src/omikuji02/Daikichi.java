@@ -14,18 +14,17 @@ public class Daikichi extends  Omikuji{
     @Override
     public void setUnsei() {
         // ArrayListの生成
-        List <String> list = new ArrayList<>();
+        List <String> negaigoto = new ArrayList<>();
 
         // 要素の追加
-        list.add("大吉");
-        list.add("中吉");
-        list.add("小吉");
-        list.add("末吉");
-        list.add("吉");
-        list.add("凶");
+        negaigoto.add("叶う");
+        negaigoto.add("叶わない");
+        negaigoto.add("叶うかも");
+        negaigoto.add("わからない");
 
-        int index = new Random().nextInt(list.size());
-        String result = list.get(index);
+        int index = new Random().nextInt(negaigoto.size());
+        String result = negaigoto.get(index);
+
         System.out.println(result);
 
     }

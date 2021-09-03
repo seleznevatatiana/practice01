@@ -2,7 +2,10 @@ package omikuji02;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Properties;
 
 public class Main {
 
@@ -36,32 +39,38 @@ public class Main {
               int num =  (int) (Math.random() * (data.length));
               System.out.println(data[num]);
 
-             String str = String.format("今日の運勢は%sです", data[0]);
+//             String str = String.format("今日の運勢は%sです", data[0]);
+
+              Properties properties = new Properties();
+              String file1 = "src/omikuji02/fortune.properties";
+
+              try {
+                  FileInputStream fis = new FileInputStream(file1);
+                  try {
+                      properties.load(fis);
+                      String a = properties.getProperty("disp_str");
+                      String str = String.format(a, data[0]);
+
+                      System.out.println(str);
+
+                  } catch (IOException e) {
+                      e.printStackTrace();
+                  }
+              } catch (FileNotFoundException e) {
+                  e.printStackTrace();
+              }
 
               // 読み込んだCSVファイルの内容を出力
-            System.out.println(str);
+//            System.out.println(str);
             System.out.println("願い事:"  + data[1]);
             System.out.println("商い:"  + data[2]);
             System.out.println("学問:"  + data[3]);
           }
           System.out.println();
+
+          return;
           }
 
-
-//          String line;
-//          int index = 0;
-//          while ((line = br.readLine()) != null) {
-//              if (index > 0) {
-//                  String[] data = line.split(",");
-//                  if (data.length > 3) {
-//                      // 読み込んだCSVファイルの内容を出力
-//                      System.out.println("運勢:"  + data[0]);
-//                      System.out.println("願い事:"  + data[1]);
-//                      System.out.println("商い:"  + data[2]);
-//                      System.out.println("学問:"  + data[3]);
-//                  }
-//              }
-//          }
         } catch (Exception e) {
           e.printStackTrace();
         } finally {
