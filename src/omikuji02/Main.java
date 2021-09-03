@@ -5,15 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class Main {
 
     public static void main(String[] args) {
-
-
-//        Daikichi daikichi = new Daikichi();
-//        daikichi.setUnsei();
 
       //ファイル読み込みで使用する３つのクラス
         FileInputStream fi = null;
@@ -28,13 +26,34 @@ public class Main {
           is = new InputStreamReader(fi);
           br = new BufferedReader(is);
 
-       // readLineで一行ずつ読み込む
+         // readLineで一行ずつ読み込む
           String line; // 読み込み行
           String[] data; // 分割後のデータを保持する配列
+
+         //リスト作成
+          List<Omikuji> omikujiList = new ArrayList<>();
+
           while ((line = br.readLine()) != null) {
           // lineをカンマで分割し、配列dataに設定
           data = line.split(",");
           if (data.length > 3) {
+              Omikuji omikuji = null;
+              switch (data[0]) {
+              //大吉の場合
+              case "大吉":
+                  Daikichi daikichi  = new Daikichi();
+                  daikichi.negaigoto = "";
+                  daikichi.akinai = "";
+                  daikichi.gakumon = "";
+                  break;
+              }
+
+//              case "中吉":
+//                  Daikichi daikichi  = new Daikichi();
+//                  daikichi.negaigoto = "";
+//                  daikichi.akinai = "";
+//                  daikichi.gakumon = "";
+//                  break;
 
               Properties properties = new Properties();
               String file1 = "src/omikuji02/fortune.properties";
@@ -82,6 +101,7 @@ public class Main {
             e.printStackTrace();
           }
     }
+    }
 }
-}
+
 
