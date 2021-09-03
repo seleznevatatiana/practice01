@@ -8,6 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+
 //        Daikichi daikichi = new Daikichi();
 //        daikichi.setUnsei();
 
@@ -32,11 +33,13 @@ public class Main {
           data = line.split(",");
           if (data.length > 3) {
 
-//              int index = new Random().nextInt(data.length);
-//              String result = data.get(index);
+              int num =  (int) (Math.random() * (data.length));
+              System.out.println(data[num]);
+
+             String str = String.format("今日の運勢は%sです", data[0]);
 
               // 読み込んだCSVファイルの内容を出力
-            System.out.println("運勢:"  + data[0]);
+            System.out.println(str);
             System.out.println("願い事:"  + data[1]);
             System.out.println("商い:"  + data[2]);
             System.out.println("学問:"  + data[3]);
