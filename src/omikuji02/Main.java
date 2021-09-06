@@ -2,12 +2,9 @@ package omikuji02;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class Main {
 
@@ -27,7 +24,7 @@ public class Main {
           br = new BufferedReader(is);
 
          // readLineで一行ずつ読み込む
-          String line; // 読み込み行
+          String line; // 読み　込み行
           String[] data; // 分割後のデータを保持する配列
 
          //リスト作成
@@ -41,64 +38,63 @@ public class Main {
               switch (data[0]) {
               //大吉の場合
               case "大吉":
-                  Daikichi daikichi  = new Daikichi();
+                  Omikuji omikuji1  = new Daikichi();
                   break;
 
               //中吉の場合
               case "中吉":
-                  Chukichi chukichi  = new Chukichi();
+                  Omikuji omikuji2  = new Chukichi();
                   break;
 
               //小吉の場合
               case "小吉":
-                  Shokichi shokichi  = new Shokichi();
+                  Omikuji omikuji3  = new Shokichi();
                   break;
 
              //吉の場合
               case "吉":
-                  Kichi kichi  = new Kichi();
+                  Omikuji omikuji4  = new Kichi();
                   break;
 
               //末吉の場合
               case "末吉":
-                  Suekichi suekichi  = new Suekichi();
+                  Omikuji omikuji5 = new Suekichi();
                   break;
 
              //凶の場合
               case "凶":
-                  Kyo kyo  = new Kyo();
+                  Omikuji omikuji6  = new Kyo();
                   break;
               }
 
-           // 要素の追加
-              omikujiList.add("大吉");
-              omikujiList.add("中吉");
-              omikujiList.add("小吉");
-              omikujiList.add("末吉");
-              omikujiList.add("吉");
-              omikujiList.add("凶");
+              // 要素の追加
+              omikuji.setUnsei();
+              omikujiList.add(omikuji);
+
 
             int num =  (int) (Math.random() * (omikujiList.size()));
             System.out.println(data[num]);
 
-              Properties properties = new Properties();
-              String file1 = "src/omikuji02/fortune.properties";
+//              Properties properties = new Properties();
+//              String file1 = "src/omikuji02/fortune.properties";
+//
+//              try {
+//                  FileInputStream fis = new FileInputStream(file1);
+//                  try {
+//                      properties.load(fis);
+//                      String a = properties.getProperty("disp_str");
+//                      String str = String.format(a, data[0]);
+//
+//                      System.out.println(str);
+//
+//                  } catch (IOException e) {
+//                      e.printStackTrace();
+//                  }
+//              } catch (FileNotFoundException e) {
+//                  e.printStackTrace();
+//              }
 
-              try {
-                  FileInputStream fis = new FileInputStream(file1);
-                  try {
-                      properties.load(fis);
-                      String a = properties.getProperty("disp_str");
-                      String str = String.format(a, data[0]);
-
-                      System.out.println(str);
-
-                  } catch (IOException e) {
-                      e.printStackTrace();
-                  }
-              } catch (FileNotFoundException e) {
-                  e.printStackTrace();
-              }
+            omikuji.disp();
 
             // 読み込んだCSVファイルの内容を出力
             String negaigoto = data[1];
