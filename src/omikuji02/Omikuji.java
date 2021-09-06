@@ -36,8 +36,14 @@ public abstract class Omikuji implements Fortune{
             e.printStackTrace();
         }
 
-          String s= unsei;
+          String s = unsei;
         //StringBuilderでコンソール表示する文字列を作る
+          StringBuilder sb = new StringBuilder();
+//          sb.append();
+//          sb.append();
+//          sb.append();
+
+           System.out.println(sb);
         Return result;
 
     }
