@@ -41,34 +41,35 @@ public class Main {
                   omikuji  = new Daikichi();
                   break;
 
-//              //中吉の場合
-//              case "中吉":
-//                  omikuji  = new Chukichi();
-//                  break;
-//
-//              //小吉の場合
-//              case "小吉":
-//                  omikuji  = new Shokichi();
-//                  break;
-//
-//             //吉の場合
-//              case "吉":
-//                  omikuji  = new Kichi();
-//                  break;
-//
-//              //末吉の場合
-//              case "末吉":
-//                  omikuji = new Suekichi();
-//                  break;
-//
-//             //凶の場合
-//              case "凶":
-//                  omikuji  = new Kyo();
-//                  break;
+              //中吉の場合
+              case "中吉":
+                  omikuji  = new Chukichi();
+                  break;
+
+              //小吉の場合
+              case "小吉":
+                  omikuji  = new Shokichi();
+                  break;
+
+             //吉の場合
+              case "吉":
+                  omikuji  = new Kichi();
+                  break;
+
+              //末吉の場合
+              case "末吉":
+                  omikuji = new Suekichi();
+                  break;
+
+             //凶の場合
+              case "凶":
+                  omikuji  = new Kyo();
+                  break;
+              default:
+                  continue;
               }
 
               // 要素の追加
-//              omikuji.setUnsei();
               omikuji.unsei = data[0];
               omikuji.setAkinai(data[1]);
               omikuji.setNegaigoto(data[2]);
@@ -77,20 +78,11 @@ public class Main {
               omikujiList.add(omikuji);
           }
 
-
+          //ランダム表示
             int num =  (int) (Math.random() * (omikujiList.size()));
             Omikuji omikuji = omikujiList.get(num);
 
             System.out.println(omikuji.disp());
-
-            // 読み込んだCSVファイルの内容を出力
-//            String negaigoto = data[1];
-//            String akinai = data[2];
-//            String gakumon = data[3];
-//            System.out.println("願い事:"  + negaigoto);
-//            System.out.println("商い:"  + akinai);
-//            System.out.println("学問:"  + gakumon);
-
 
           return;
 

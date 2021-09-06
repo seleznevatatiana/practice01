@@ -64,9 +64,12 @@ public abstract class Omikuji implements Fortune{
         //StringBuilderでコンソール表示する文字列を作る
           StringBuilder sb = new StringBuilder();
           sb.append(str);
-          sb.append(akinai);
-          sb.append(negaigoto);
-          sb.append(gakumon);
+          sb.append(System.getProperty("line.separator"));
+          sb.append("願い事:"  + negaigoto);
+          sb.append(System.getProperty("line.separator"));
+          sb.append("商い:"  + akinai);
+          sb.append(System.getProperty("line.separator"));
+          sb.append("学問:"  + gakumon);
 
         return sb.toString();
         }
