@@ -42,18 +42,44 @@ public class Main {
               //大吉の場合
               case "大吉":
                   Daikichi daikichi  = new Daikichi();
-                  daikichi.negaigoto = "";
-                  daikichi.akinai = "";
-                  daikichi.gakumon = "";
+                  break;
+
+              //中吉の場合
+              case "中吉":
+                  Chukichi chukichi  = new Chukichi();
+                  break;
+
+              //小吉の場合
+              case "小吉":
+                  Shokichi shokichi  = new Shokichi();
+                  break;
+
+             //吉の場合
+              case "吉":
+                  Kichi kichi  = new Kichi();
+                  break;
+
+              //末吉の場合
+              case "末吉":
+                  Suekichi suekichi  = new Suekichi();
+                  break;
+
+             //凶の場合
+              case "凶":
+                  Kyo kyo  = new Kyo();
                   break;
               }
 
-//              case "中吉":
-//                  Daikichi daikichi  = new Daikichi();
-//                  daikichi.negaigoto = "";
-//                  daikichi.akinai = "";
-//                  daikichi.gakumon = "";
-//                  break;
+           // 要素の追加
+              omikujiList.add("大吉");
+              omikujiList.add("中吉");
+              omikujiList.add("小吉");
+              omikujiList.add("末吉");
+              omikujiList.add("吉");
+              omikujiList.add("凶");
+
+            int num =  (int) (Math.random() * (omikujiList.size()));
+            System.out.println(data[num]);
 
               Properties properties = new Properties();
               String file1 = "src/omikuji02/fortune.properties";
@@ -65,10 +91,6 @@ public class Main {
                       String a = properties.getProperty("disp_str");
                       String str = String.format(a, data[0]);
 
-//                      int num =  (int) (Math.random() * (str.length));
-//                      System.out.println(data[num]);
-
-
                       System.out.println(str);
 
                   } catch (IOException e) {
@@ -78,8 +100,7 @@ public class Main {
                   e.printStackTrace();
               }
 
-              // 読み込んだCSVファイルの内容を出力
-
+            // 読み込んだCSVファイルの内容を出力
             String negaigoto = data[1];
             String akinai = data[2];
             String gakumon = data[3];
