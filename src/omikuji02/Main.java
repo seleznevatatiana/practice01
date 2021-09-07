@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -81,6 +79,12 @@ public class Main {
               omikujiList.add(omikuji);
           }
 
+//        if( !data[4].equals(birthday) )continue;
+//        //分割した文字を画面出力する
+//        while (int i; i < data.length(); i++) {
+//           System.out.println(data[i]);
+//        }
+
           //ランダム表示
             int num =  (int) (Math.random() * (omikujiList.size()));
             Omikuji omikuji = omikujiList.get(num);
@@ -91,9 +95,9 @@ public class Main {
             //入力準備
             BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
             //入力値を読み込む
-            String str = reader.readLine();
+            String birthday   = reader.readLine();
             //入力した文字列を日付に変換
-            Date birthday = new SimpleDateFormat("yyyyMMdd").parse(str);
+//            Date birthday = new SimpleDateFormat("yyyyMMdd").parse(str);
 
             PrintWriter writer = new PrintWriter("src/omikuji02/fortuneWithBirthday.csv");
 
