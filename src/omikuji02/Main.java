@@ -80,7 +80,7 @@ public class Main {
               omikujiList.add(omikuji);
           }
 
-//        if( !data[4].equals(birthday) )continue;
+//        if( !data[4].equals(omikuji.birthday) )continue;
 //        //分割した文字を画面出力する
 //        while (int i; i < data.length(); i++) {
 //           System.out.println(data[i]);
@@ -100,7 +100,7 @@ public class Main {
 
             FileWriter fw = null;
 
-                File file = new File("src/omikuji02/fortuneWithBirthday.csv");
+                File file = new File("src/omikuji02/fortune.csv");
                 fw = new FileWriter(file, true);
 
               StringBuilder sb = new StringBuilder();
@@ -123,7 +123,6 @@ public class Main {
                     }
 
           return;
-
 
         } catch (Exception e) {
           e.printStackTrace();
