@@ -1,9 +1,10 @@
 package omikuji02;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,25 +97,30 @@ public class Main {
             BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
             //入力値を読み込む
             String birthday   = reader.readLine();
-            //入力した文字列を日付に変換
-//            Date birthday = new SimpleDateFormat("yyyyMMdd").parse(str);
 
-            PrintWriter writer = new PrintWriter("src/omikuji02/fortuneWithBirthday.csv");
+            FileWriter fw = null;
 
-                StringBuilder sb = new StringBuilder();
-                sb.append(omikuji.unsei);
-                sb.append(',');
-                sb.append(omikuji.negaigoto);
-                sb.append(',');
-                sb.append(omikuji.akinai);
-                sb.append(',');
-                sb.append(omikuji.gakumon);
-                sb.append(',');
-                sb.append(birthday);
-                sb.append('\n');
+                File file = new File("src/omikuji02/fortuneWithBirthday.csv");
+                fw = new FileWriter(file, true);
 
-                writer.write(sb.toString());
-                writer.close();
+              StringBuilder sb = new StringBuilder();
+              sb.append(omikuji.unsei);
+              sb.append(',');
+              sb.append(omikuji.negaigoto);
+              sb.append(',');
+              sb.append(omikuji.akinai);
+              sb.append(',');
+              sb.append(omikuji.gakumon);
+              sb.append(',');
+              sb.append(birthday);
+              sb.append('\n');
+
+                fw.write(sb.toString());
+                fw.flush();
+
+                    if(fw != null) {
+                        fw.close();
+                    }
 
           return;
 
