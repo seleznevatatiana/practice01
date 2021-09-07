@@ -3,7 +3,10 @@ package omikuji02;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -83,6 +86,31 @@ public class Main {
             Omikuji omikuji = omikujiList.get(num);
 
             System.out.println(omikuji.disp());
+
+            System.out.print("誕生日を入力してください：");
+            //入力準備
+            BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
+            //入力値を読み込む
+            String str = reader.readLine();
+            //入力した文字列を日付に変換
+            Date birthday = new SimpleDateFormat("yyyyMMdd").parse(str);
+
+            PrintWriter writer = new PrintWriter("src/omikuji02/fortuneWithBirthday.csv");
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(omikuji.unsei);
+                sb.append(',');
+                sb.append(omikuji.negaigoto);
+                sb.append(',');
+                sb.append(omikuji.akinai);
+                sb.append(',');
+                sb.append(omikuji.gakumon);
+                sb.append(',');
+                sb.append(birthday);
+                sb.append('\n');
+
+                writer.write(sb.toString());
+                writer.close();
 
           return;
 
