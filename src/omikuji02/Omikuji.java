@@ -10,7 +10,6 @@ public abstract class Omikuji implements Fortune{
     protected String negaigoto;
     protected String akinai;
     protected String gakumon;
-    protected String birthday;
     public abstract void setUnsei();
 
     protected String unsei;
@@ -38,13 +37,6 @@ public abstract class Omikuji implements Fortune{
     public void setGakumon(String gakumon) {
         this.gakumon = gakumon;
     }
-    /**
-     * @param birthday セットする birthday
-     */
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
 
     public String disp() {
 
