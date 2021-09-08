@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +12,45 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        System.out.print("誕生日を入力してください：");
+        //入力準備
+        BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
+        //入力値を読み込む
+        String birthday  = reader.readLine();
+        LocalDate uranaiDate = LocalDate.now();
+        System.out.println(uranaiDate);
+
+        //ファイル読み込みで使用する３つのクラス
+        FileInputStream fi2 = null;
+        InputStreamReader is2 = null;
+        BufferedReader br2 = null;
+
+          //読み込みファイルのインスタンス生成
+          //ファイル名を指定する
+          fi2 = new FileInputStream("src/omikuji02/fortuneWithBirthday.csv");
+          is2 = new InputStreamReader(fi2);
+          br2 = new BufferedReader(is2);
+
+         // readLineで一行ずつ読み込む
+          String line2; // 読み　込み行
+          String[] data2; // 分割後のデータを保持する配列
+//          Omikuji omikuji = new Omikuji();
+          while ((line2 = br2.readLine()) != null) {
+              // lineをカンマで分割し、配列dataに設定
+              data2 = line2.split(",");
+
+       if( !data2[4].equals(birthday) && !data2[5].equals(uranaiDate))continue;
+       //分割した文字を画面出力する
+       for (int i = 0; i < data2.length; i++) {
+           omikuji.setUnsei();
+           omikuji.setAkinai(data[1]);
+           omikuji.setNegaigoto(data[2]);
+           omikuji.setGakumon(data[3]);
+         System.out.println(data2[i]);
+      }
+          }
 
       //ファイル読み込みで使用する３つのクラス
         FileInputStream fi = null;
@@ -73,7 +112,7 @@ public class Main {
               }
 
               // 要素の追加
-              omikuji.unsei = data[0];
+              omikuji.setUnsei();
               omikuji.setAkinai(data[1]);
               omikuji.setNegaigoto(data[2]);
               omikuji.setGakumon(data[3]);
@@ -81,44 +120,11 @@ public class Main {
               omikujiList.add(omikuji);
           }
 
-          //ファイル読み込みで使用する３つのクラス
-          FileInputStream fi2 = null;
-          InputStreamReader is2 = null;
-          BufferedReader br2 = null;
-
-            //読み込みファイルのインスタンス生成
-            //ファイル名を指定する
-            fi2 = new FileInputStream("src/omikuji02/fortuneWithBirthday.csv");
-            is2 = new InputStreamReader(fi2);
-            br2 = new BufferedReader(is2);
-
-           // readLineで一行ずつ読み込む
-            String line2; // 読み　込み行
-            String[] data2; // 分割後のデータを保持する配列
-            while ((line2 = br2.readLine()) != null) {
-                // lineをカンマで分割し、配列dataに設定
-                data2 = line2.split(",");
-
-              if( !data2[4].equals(birthday) )continue;
-              //分割した文字を画面出力する
-              while (int i; i < data2.length(); i++) {
-                 System.out.println(data2[i]);
-              }
-            }
-
-
           //ランダム表示
             int num =  (int) (Math.random() * (omikujiList.size()));
             Omikuji omikuji = omikujiList.get(num);
 
             System.out.println(omikuji.disp());
-
-            System.out.print("誕生日を入力してください：");
-            //入力準備
-            BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
-            //入力値を読み込む
-            String birthday  = reader.readLine();
-            LocalDate uranaiDate = LocalDate.now();
 
             FileWriter fw = null;
 
@@ -157,7 +163,5 @@ public class Main {
             e.printStackTrace();
           }
     }
+        }
     }
-}
-
-
