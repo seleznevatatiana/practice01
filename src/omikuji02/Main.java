@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,11 +81,31 @@ public class Main {
               omikujiList.add(omikuji);
           }
 
-//        if( !data[4].equals(omikuji.birthday) )continue;
-//        //分割した文字を画面出力する
-//        while (int i; i < data.length(); i++) {
-//           System.out.println(data[i]);
-//        }
+          //ファイル読み込みで使用する３つのクラス
+          FileInputStream fi2 = null;
+          InputStreamReader is2 = null;
+          BufferedReader br2 = null;
+
+            //読み込みファイルのインスタンス生成
+            //ファイル名を指定する
+            fi2 = new FileInputStream("src/omikuji02/fortuneWithBirthday.csv");
+            is2 = new InputStreamReader(fi2);
+            br2 = new BufferedReader(is2);
+
+           // readLineで一行ずつ読み込む
+            String line2; // 読み　込み行
+            String[] data2; // 分割後のデータを保持する配列
+            while ((line2 = br2.readLine()) != null) {
+                // lineをカンマで分割し、配列dataに設定
+                data2 = line2.split(",");
+
+              if( !data2[4].equals(birthday) )continue;
+              //分割した文字を画面出力する
+              while (int i; i < data2.length(); i++) {
+                 System.out.println(data2[i]);
+              }
+            }
+
 
           //ランダム表示
             int num =  (int) (Math.random() * (omikujiList.size()));
@@ -96,11 +117,12 @@ public class Main {
             //入力準備
             BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
             //入力値を読み込む
-            String birthday   = reader.readLine();
+            String birthday  = reader.readLine();
+            LocalDate uranaiDate = LocalDate.now();
 
             FileWriter fw = null;
 
-                File file = new File("src/omikuji02/fortune.csv");
+                File file = new File("src/omikuji02/fortuneWithBirthday.csv");
                 fw = new FileWriter(file, true);
 
               StringBuilder sb = new StringBuilder();
@@ -113,6 +135,8 @@ public class Main {
               sb.append(omikuji.gakumon);
               sb.append(',');
               sb.append(birthday);
+              sb.append(',');
+              sb.append(uranaiDate);
               sb.append('\n');
 
                 fw.write(sb.toString());
