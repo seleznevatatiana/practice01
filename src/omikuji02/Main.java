@@ -9,125 +9,136 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        try {
         System.out.print("誕生日を入力してください：");
         //入力準備
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         //入力値を読み込む
         String birthday = reader.readLine();
+        //      // 変換対象の日付文字列
+        //      SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        //      // Date型変換
+        //      Date birthday = sdf.parse(birthday1);
+        CheckBirthday checkBirthday = new CheckBirthday();
+        checkBirthday.checkBirthday(birthday);
+
         LocalDate uranaiDate = LocalDate.now();
+
+        //ファイル読み込みで使用する３つのクラス
+        FileInputStream fi = null;
+        InputStreamReader is = null;
+        BufferedReader br = null;
 
         //ファイル読み込みで使用する３つのクラス
         FileInputStream fi2 = null;
         InputStreamReader is2 = null;
         BufferedReader br2 = null;
 
-        //読み込みファイルのインスタンス生成
-        //ファイル名を指定する
-        fi2 = new FileInputStream("src/omikuji02/fortuneWithBirthday.csv");
-        is2 = new InputStreamReader(fi2);
-        br2 = new BufferedReader(is2);
-
-        // readLineで一行ずつ読み込む
-        String line2; // 読み　込み行
-        String[] data2; // 分割後のデータを保持する配列
-        Omikuji omikuji = null;
-        while ((line2 = br2.readLine()) != null) {
-            // lineをカンマで分割し、配列dataに設定
-            data2 = line2.split(",");
-
-            if (!data2[4].equals(birthday) && !data2[5].equals(uranaiDate))
-                continue;
-            omikuji = getInstance(data2[0]);
-            //分割した文字を画面出力する
-            for (int i = 0; i < data2.length; i++) {
-                omikuji.setUnsei();
-                omikuji.setNegaigoto(data2[1]);
-                omikuji.setAkinai(data2[2]);
-                omikuji.setGakumon(data2[3]);
-            }
-        }
-        //誕生日か当日が同じの既存データがない場合
-       if (omikuji == null) {
-        //ファイル読み込みで使用する３つのクラス
-        FileInputStream fi = null;
-        InputStreamReader is = null;
-        BufferedReader br = null;
+        try {
 
             //読み込みファイルのインスタンス生成
             //ファイル名を指定する
-            fi = new FileInputStream("src/omikuji02/fortune.csv");
-            is = new InputStreamReader(fi);
-            br = new BufferedReader(is);
+            fi2 = new FileInputStream("src/omikuji02/fortuneWithBirthday.csv");
+            is2 = new InputStreamReader(fi2);
+            br2 = new BufferedReader(is2);
 
             // readLineで一行ずつ読み込む
-            String line; // 読み　込み行
-            String[] data; // 分割後のデータを保持する配列
-
-            //リスト作成
-            List<Omikuji> omikujiList = new ArrayList<>();
-
-            while ((line = br.readLine()) != null) {
+            String line2; // 読み　込み行
+            String[] data2; // 分割後のデータを保持する配列
+            Omikuji omikuji = null;
+            while ((line2 = br2.readLine()) != null) {
                 // lineをカンマで分割し、配列dataに設定
-                data = line.split(",");
+                data2 = line2.split(",");
 
-                omikuji = getInstance(data[0]);
-
-                // 要素の追加
-                omikuji.setUnsei();
-                omikuji.setNegaigoto(data[1]);
-                omikuji.setAkinai(data[2]);
-                omikuji.setGakumon(data[3]);
-
-                omikujiList.add(omikuji);
+                if (!data2[4].equals(birthday) && !data2[5].equals(uranaiDate))
+                    continue;
+                omikuji = getInstance(data2[0]);
+                //分割した文字を画面出力する
+                for (int i = 0; i < data2.length; i++) {
+                    omikuji.setUnsei();
+                    omikuji.setNegaigoto(data2[1]);
+                    omikuji.setAkinai(data2[2]);
+                    omikuji.setGakumon(data2[3]);
+                }
             }
+            //誕生日か当日が同じの既存データがない場合
+            if (omikuji == null) {
 
-            //ランダム表示
-            int num = (int) (Math.random() * (omikujiList.size()));
-            omikuji = omikujiList.get(num);
+                //読み込みファイルのインスタンス生成
+                //ファイル名を指定する
+                fi = new FileInputStream("src/omikuji02/fortune.csv");
+                is = new InputStreamReader(fi);
+                br = new BufferedReader(is);
 
-            FileWriter fw = null;
+                // readLineで一行ずつ読み込む
+                String line; // 読み　込み行
+                String[] data; // 分割後のデータを保持する配列
 
-            File file = new File("src/omikuji02/fortuneWithBirthday.csv");
-            fw = new FileWriter(file, true);
+                //リスト作成
+                List<Omikuji> omikujiList = new ArrayList<>();
 
-            StringBuilder sb = new StringBuilder();
-            sb.append(omikuji.unsei);
-            sb.append(',');
-            sb.append(omikuji.negaigoto);
-            sb.append(',');
-            sb.append(omikuji.akinai);
-            sb.append(',');
-            sb.append(omikuji.gakumon);
-            sb.append(',');
-            sb.append(birthday);
-            sb.append(',');
-            sb.append(uranaiDate);
-            sb.append('\n');
+                while ((line = br.readLine()) != null) {
+                    // lineをカンマで分割し、配列dataに設定
+                    data = line.split(",");
 
-            fw.write(sb.toString());
-            fw.flush();
+                    omikuji = getInstance(data[0]);
 
-            if (fw != null) {
-                fw.close();
+                    // 要素の追加
+                    omikuji.setUnsei();
+                    omikuji.setNegaigoto(data[1]);
+                    omikuji.setAkinai(data[2]);
+                    omikuji.setGakumon(data[3]);
+
+                    omikujiList.add(omikuji);
+                }
+
+                //ランダム表示
+                int num = new Random().nextInt(omikujiList.size());
+                omikuji = omikujiList.get(num);
+
+                FileWriter fw = null;
+
+                File file = new File("src/omikuji02/fortuneWithBirthday.csv");
+                fw = new FileWriter(file, true);
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(omikuji.unsei);
+                sb.append(',');
+                sb.append(omikuji.negaigoto);
+                sb.append(',');
+                sb.append(omikuji.akinai);
+                sb.append(',');
+                sb.append(omikuji.gakumon);
+                sb.append(',');
+                sb.append(birthday);
+                sb.append(',');
+                sb.append(uranaiDate);
+                sb.append('\n');
+
+                fw.write(sb.toString());
+                fw.flush();
+
+                if (fw != null) {
+                    fw.close();
+                }
+
             }
-
-       }
             //結果を出力
             System.out.println(omikuji.disp());
-//            return;
+            //            return;
 
-    } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         finally {
             try {
-//                br.close();
+                br.close();
             }
             catch (Exception e) {
                 e.printStackTrace();

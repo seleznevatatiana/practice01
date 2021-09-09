@@ -1,8 +1,13 @@
 package omikuji02;
 
+import java.util.ResourceBundle;
+
 public interface Fortune {
 
-   String DISP_STR = "今日の運勢は%sです";
+//正解の書き方
+//Omikujiクラスの読み込み処理が必要ではない
+//    ResourceBundle rb = ResourceBundle.getBundle(“src/omikuji02/fortune.properties”);
+//    String DISP_STR = rb.getString(disp_str);
     String disp();
 
 }
