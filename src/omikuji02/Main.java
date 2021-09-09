@@ -24,8 +24,8 @@ public class Main {
         //      SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         //      // Date型変換
         //      Date birthday = sdf.parse(birthday1);
-        CheckBirthday checkBirthday = new CheckBirthday();
-        checkBirthday.checkBirthday(birthday);
+//        CheckBirthday checkBirthday = new CheckBirthday();
+//        checkBirthday.checkBirthday(birthday);
 
         LocalDate uranaiDate = LocalDate.now();
 
